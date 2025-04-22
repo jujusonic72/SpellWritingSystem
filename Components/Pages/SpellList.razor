@@ -1,0 +1,46 @@
+using Microsoft.AspNetCore.Components.Web;
+
+@page "/spell-list"
+
+<PageTitle>Spell List</PageTitle>
+
+<h3>Spell List</h3>
+
+<div class="spell-container">
+    @if (_spells == null)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        <div class="spell-grid">
+            @foreach (var spell in _spells)
+            {
+                <div class="spell-card">
+                    <h4>@spell.Name</h4>
+                    <p>@spell.Description</p>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+@code {
+    private List<Spell>? _spells;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Simuler le chargement des sorts
+        _spells =
+        [
+            new Spell { Name = "Fireball", Description = "A bright streak flashes from your pointing finger to a point you choose..." },
+            new Spell { Name = "Heal", Description = "A creature you touch regains hit points..." }
+        ];
+    }
+
+    private class Spell
+    {
+        public string? Name { get; set; }
+        public string? Description { get; set; }
+    }
+}
